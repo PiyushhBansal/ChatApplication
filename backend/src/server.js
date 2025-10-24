@@ -24,10 +24,13 @@ app.use("/api/messages", messageRoutes);
 
 // make ready for deployment
 if (ENV.NODE_ENV === "production") {
-  // __dirname is backend/src, so go up two levels to project root, then to frontend/dist
-  const frontendPath = path.join(__dirname, "../../frontend/dist");
+  // Get absolute path: __dirname is backend/src, go up two levels to project root
+  const projectRoot = path.resolve(__dirname, "../..");
+  const frontendPath = path.join(projectRoot, "frontend/dist");
   
+  console.log("Project root:", projectRoot);
   console.log("Serving static files from:", frontendPath);
+  
   app.use(express.static(frontendPath));
 
   app.get("*", (_, res) => {
