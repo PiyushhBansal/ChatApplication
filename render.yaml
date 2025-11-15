@@ -3,8 +3,9 @@ services:
     name: chatapplication
     env: node
     plan: free
-    buildCommand: npm run build
-    startCommand: node backend/src/server.js
+    rootDir: .
+    buildCommand: npm install --prefix backend && npm install --prefix frontend && npm run build --prefix frontend
+    startCommand: npm start
     envVars:
       - key: NODE_VERSION
         value: 20.0.0
